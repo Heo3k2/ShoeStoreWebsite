@@ -7,6 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.shoestore.dao.CustomerDAO;
 import com.shoestore.entity.Customer;
@@ -174,9 +175,20 @@ public class CustomerServices {
 			request.setAttribute("message", message);
 			showLogin();
 		} else {
-			request.getSession().setAttribute("loggedCustomer", customer);
-		
-			showCustomerProfile();
+			HttpSession session = request.getSession();
+			session.setAttribute("loggedCustomer", customer);
+			Object objectRedirectURL = session.getAttribute("redirectURL");
+			
+			if(objectRedirectURL != null)
+			{
+				String redirectURL = (String) objectRedirectURL;
+				session.removeAttribute("redirectURL");
+				response.sendRedirect(redirectURL);
+			}
+			else
+			{
+				showCustomerProfile();
+			}
 		}
 		
 	}

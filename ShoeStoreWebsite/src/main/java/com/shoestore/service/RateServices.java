@@ -78,4 +78,10 @@ public class RateServices {
 		
 		listAllRate(message);
 	}
+
+	public void showReviewForm() throws ServletException, IOException {
+		 String targetPage = "frontend/rate_form.jsp";
+		 RequestDispatcher dispatcher = request.getRequestDispatcher(targetPage);
+		 dispatcher.forward(request, response);
+	}
 }

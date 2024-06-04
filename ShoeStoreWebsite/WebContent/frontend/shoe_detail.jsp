@@ -7,6 +7,8 @@
 	<meta charset="UTF-8">
 	<title>${shoe.shoeName} - PHK shoes store</title>
 	<link rel="stylesheet" href="css/style.css">
+	
+	<script type="text/javascript" src="js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 	<jsp:directive.include file="header.jsp"/>
@@ -40,7 +42,7 @@
 		<br><br><br><br>
 		<div>
 			<h2><a id="rates">Customer's Rates</a></h2>
-			<button>Rate our shoes</button>
+			<button id="buttonWriteRate">Rate shoes now</button>
 			<table border="0">
 				<c:forEach items="${shoe.rates}" var="rate">
 					<tr>
@@ -69,5 +71,12 @@
 	
 	<br><br><br><br>
 	<jsp:directive.include file="footer.jsp"/>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#buttonWriteRate").click(function() {
+				window.location = 'write_rate?shoe_id=' + ${shoe.shoeId};
+			});
+		})
+	</script>
 </body>
 </html>
