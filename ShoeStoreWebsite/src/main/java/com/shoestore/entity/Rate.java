@@ -24,7 +24,9 @@ import javax.persistence.Transient;
 @Table(name = "rate", catalog = "shoestoredb")
 @NamedQueries({
 	@NamedQuery(name = "Rate.listAll", query = "SELECT r FROM Rate r ORDER BY r.rateTime DESC"),
-	@NamedQuery(name = "Rate.countAll", query = "SELECT COUNT(r) FROM Rate r")
+	@NamedQuery(name = "Rate.countAll", query = "SELECT COUNT(r) FROM Rate r"),
+	@NamedQuery(name = "Rate.findByCustomerAndShoe", query = "SELECT r FROM Rate r WHERE r.customer.customerId =:customerId"
+																			+ " AND r.shoe.shoeId =:shoeId")
 })
 public class Rate implements java.io.Serializable {
 

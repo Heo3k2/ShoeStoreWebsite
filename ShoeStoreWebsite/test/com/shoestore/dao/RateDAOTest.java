@@ -98,5 +98,14 @@ public class RateDAOTest {
 		System.out.println("Total Rates: " + totalRate);
 		assertTrue(totalRate > 0);
 	}
-
+	
+	@Test
+	public void testFindByCustomerAndShoeNotFound() {
+		Integer shoeId = 99;
+		Integer customerId = 99;
+		
+		Rate result = rateDao.findByCustomerAndShoe(customerId, shoeId);
+		
+		assertNull(result);
+	}
 }
