@@ -32,7 +32,7 @@ public class RateDAOTest {
 	public void testCreateRate() {
 		Rate rate = new Rate();
 		Shoe shoe = new Shoe();
-		shoe.setShoeId(2);
+		shoe.setShoeId(1);
 		
 		Customer customer = new Customer();
 		customer.setCustomerId(6);
@@ -41,7 +41,7 @@ public class RateDAOTest {
 		rate.setCustomer(customer);
 		
 		rate.setHeadline("This is a very good shoes!");
-		rate.setRatingStars(5);
+		rate.setRatingStars(4);
 		rate.setRatingDetail("I feel so good");
 		
 		Rate saveRate = rateDao.create(rate);

@@ -3,10 +3,13 @@ package com.shoestore.entity;
 
 import java.beans.Transient;
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -185,7 +188,16 @@ public class Shoe implements java.io.Serializable {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "shoe")
 	public Set<Rate> getRates() {
-		return this.rates;
+		TreeSet<Rate> sortedRates = new TreeSet<Rate>(new Comparator<Rate>() {
+			
+			@Override
+			public int compare(Rate rate1, Rate rate2) {
+				return rate2.getRateTime().compareTo(rate1.getRateTime());
+			}
+		});
+		
+		sortedRates.addAll(rates);
+		return sortedRates;
 	}
 
 	public void setRates(Set<Rate> rates) {

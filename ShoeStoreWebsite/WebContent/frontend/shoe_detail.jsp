@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,8 @@
 				<td>
 					<h2>${shoe.shoeName}</h2><br>
 					From: ${shoe.brand}
-					<h2>Rating *****</h2>
+					<h2><jsp:directive.include file="shoe_rating.jsp" /></h2>
+					<a href="#rates">${fn:length(shoe.rates)} Rates</a>
 					<h2>Price: $${shoe.shoePrice}</h2>
 					<button type="submit">Add to your cart</button>
 				</td>
@@ -37,8 +39,30 @@
 		
 		<br><br><br><br>
 		<div>
-			<h2>Customer's Rate</h2>
+			<h2><a id="rates">Customer's Rates</a></h2>
 			<button>Rate our shoes</button>
+			<table border="0">
+				<c:forEach items="${shoe.rates}" var="rate">
+					<tr>
+						<td>
+							<c:forTokens items="${rate.stars}" delims="," var="star">
+								<c:if test="${star eq 'on'}">
+									<img src="images/rating_on.png">
+								</c:if>
+								<c:if test="${star eq 'off'}">
+									<img src="images/rating_off.png">
+								</c:if>
+							</c:forTokens>
+							<b> - ${rate.ratingDetail}</b>
+						</td>
+					</tr>
+					<tr>
+						<td>by ${rate.customer.fullName} on ${rate.rateTime}</td>
+					</tr>
+					<tr><td><i>${rate.ratingDetail}</i></td></tr>
+					<tr><td>&nbsp;</td></tr>
+				</c:forEach>	
+			</table>
 		</div>
 		
 	</div>

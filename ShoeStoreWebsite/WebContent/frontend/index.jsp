@@ -30,17 +30,7 @@
 						</a>
 					</div>
 					<div>
-						<c:forTokens items="${shoe.ratingStars}" delims="," var="star">
-							<c:if test="${star eq 'on'}">
-								<img src="images/rating_on.png">
-							</c:if>
-							<c:if test="${star eq 'off'}">
-								<img src="images/rating_off.png">
-							</c:if>
-							<c:if test="${star eq 'half'}">
-								<img src="images/rating_half.png">
-							</c:if>
-						</c:forTokens>
+						<jsp:directive.include file="shoe_rating.jsp" />
 					</div>
 					<div>From: ${shoe.brand}</div>
 					<div><b>Price: $${shoe.shoePrice}</b></div>
