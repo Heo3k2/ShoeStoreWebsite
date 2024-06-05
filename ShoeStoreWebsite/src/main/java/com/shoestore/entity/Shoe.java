@@ -48,7 +48,7 @@ import javax.persistence.UniqueConstraint;
 })
 public class Shoe implements java.io.Serializable {
 
-	private int shoeId;
+	private Integer shoeId;
 	private Type type;
 	private String shoeName;
 	private String brand;
@@ -63,6 +63,11 @@ public class Shoe implements java.io.Serializable {
 	public Shoe() {
 	}
 	
+	public Shoe(Integer shoeId) {
+		super();
+		this.shoeId = shoeId;
+	}
+
 	public Shoe(Type type, String shoeName, String brand, String description, byte[] shoeImage, float shoePrice,
 			Date releasedDate) {
 		super();
@@ -283,6 +288,13 @@ public class Shoe implements java.io.Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Shoe other = (Shoe) obj;
+		if(shoeId == null) {
+			if(other.shoeId != null) {
+				return false;
+			}
+		} else if (!shoeId.equals(other.shoeId)) {
+			return false;
+		}
 		return shoeId == other.shoeId;
 	}
 	
