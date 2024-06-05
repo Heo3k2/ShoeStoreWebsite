@@ -80,7 +80,7 @@ public class Shoe implements java.io.Serializable {
 		this.releasedDate = releasedDate;
 	}
 
-	public Shoe(int shoeId, Type type, String shoeName, String brand, String description, byte[] shoeImage,
+	public Shoe(Integer shoeId, Type type, String shoeName, String brand, String description, byte[] shoeImage,
 			float shoePrice, Date releasedDate) {
 		this.shoeId = shoeId;
 		this.type = type;
@@ -92,7 +92,7 @@ public class Shoe implements java.io.Serializable {
 		this.releasedDate = releasedDate;
 	}
 
-	public Shoe(int shoeId, Type type, String shoeName, String brand, String description, byte[] shoeImage,
+	public Shoe(Integer shoeId, Type type, String shoeName, String brand, String description, byte[] shoeImage,
 			float shoePrice, Date releasedDate, Set<OrderDetail> orderDetails, Set<Rate> rates) {
 		this.shoeId = shoeId;
 		this.type = type;
@@ -109,11 +109,11 @@ public class Shoe implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "shoe_id", unique = true, nullable = false)
-	public int getShoeId() {
+	public Integer getShoeId() {
 		return this.shoeId;
 	}
 
-	public void setShoeId(int shoeId) {
+	public void setShoeId(Integer shoeId) {
 		this.shoeId = shoeId;
 	}
 
