@@ -27,7 +27,7 @@
 					<h2><jsp:directive.include file="shoe_rating.jsp" /></h2>
 					<a href="#rates">${fn:length(shoe.rates)} Rates</a>
 					<h2>Price: $${shoe.shoePrice}</h2>
-					<button type="submit">Add to your cart</button>
+					<button id="buttonAddToCart">Add to your cart</button>
 				</td>
 			</tr>
 		</table>
@@ -75,6 +75,10 @@
 		$(document).ready(function() {
 			$("#buttonWriteRate").click(function() {
 				window.location = 'write_rate?shoe_id=' + ${shoe.shoeId};
+			});
+			
+			$("#buttonAddToCart").click(function() {
+				window.location = 'add_to_cart?shoe_id=' + ${shoe.shoeId};
 			});
 		})
 	</script>

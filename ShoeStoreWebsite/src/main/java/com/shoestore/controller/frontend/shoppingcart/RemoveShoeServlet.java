@@ -1,8 +1,6 @@
 package com.shoestore.controller.frontend.shoppingcart;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,27 +10,25 @@ import javax.servlet.http.HttpServletResponse;
 import com.shoestore.dao.ShoeDAO;
 import com.shoestore.entity.Shoe;
 
-@WebServlet("/view_cart")
-public class ViewCartServlet extends HttpServlet {
+@WebServlet("/remove_from_cart")
+public class RemoveShoeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
-    public ViewCartServlet() {
-    	super();
+       
+    public RemoveShoeServlet() {
+        super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Integer shoeId = Integer.parseInt(request.getParameter("shoe_id"));
 		
-		Object cartObject = request.getSession().getAttribute("cart");
+		Object cartOject = request.getSession().getAttribute("cart");
 		
-		if(cartObject == null) {
-			ShoppingCart shoppingCart = new ShoppingCart();
-			request.getSession().setAttribute("cart", shoppingCart);
-		}
+		ShoppingCart shoppingCart = (ShoppingCart) cartOject;
 		
+		shoppingCart.removeItem(new Shoe(shoeId));
 		
-		String cartPage = "frontend/shopping_cart.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(cartPage);
-		dispatcher.forward(request, response);
+		String cartPage = request.getContextPath().concat("/view_cart");
+		response.sendRedirect(cartPage);
 	}
 
 }

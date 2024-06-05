@@ -51,6 +51,14 @@ public class ShoppingCart {
 		return total;
 	}
 	
+	public void updateCart(int[] shoeIds, int[] quantities) {
+		for(int i = 0; i < shoeIds.length; i++) {
+			Shoe key = new Shoe(shoeIds[i]);
+			Integer value = quantities[i];
+			cart.put(key, value);
+		}
+	}
+	
 	public void clear() {
 		cart.clear();
 	}

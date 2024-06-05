@@ -74,4 +74,21 @@ public class ShoppingCartTest {
 		
 		assertEquals(0, cart.getTotalQuantity());
 	}
+	
+	@Test
+	public void testUpdateCart() {
+		ShoppingCart cart = new ShoppingCart();
+		Shoe shoe1 = new Shoe(1);
+		Shoe shoe2 = new Shoe(2);
+		
+		cart.addItem(shoe1);
+		cart.addItem(shoe2);
+		
+		int[] shoeIds = {1, 2};
+		int[] quantities = {3, 4};
+		
+		cart.updateCart(shoeIds, quantities);
+		
+		assertEquals(7, cart.getTotalQuantity());
+	}
 }
