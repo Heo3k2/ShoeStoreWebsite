@@ -46,7 +46,7 @@
 						<a href="logout">Logout</a> |
 					</c:if>
 					
-					<a href="cart">Your cart</a>
+					<a href="view_cart">Your cart</a>
 					
 					<br>
 	
