@@ -46,7 +46,7 @@
 		</div>
 		
 		<div>
-			<a href = "orders">
+			<a href = "list_orders">
 				<img src="../images/Order.png" id = "logoSize"><br>Order
 			</a>
 		</div>

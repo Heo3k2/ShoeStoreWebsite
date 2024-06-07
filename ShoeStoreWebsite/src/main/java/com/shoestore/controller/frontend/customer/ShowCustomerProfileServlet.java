@@ -1,4 +1,4 @@
-package com.shoestore.controller.frontend;
+package com.shoestore.controller.frontend.customer;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

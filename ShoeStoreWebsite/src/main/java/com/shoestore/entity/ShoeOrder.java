@@ -1,9 +1,13 @@
 package com.shoestore.entity;
-// Generated Apr 20, 2024, 2:20:15 PM by Hibernate Tools 4.3.6.Final
+// Generated Apr 20, 2024, 2:20:15â€¯PM by Hibernate Tools 4.3.6.Final
 
+import java.beans.Transient;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,9 +28,13 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "shoe_order", catalog = "shoestoredb")
+@NamedQueries({
+	@NamedQuery(name = "ShoeOrder.findAll", query = "SELECT sh FROM ShoeOrder sh ORDER BY sh.orderDate DESC"),
+	@NamedQuery(name = "ShoeOrder.countAll", query = "SELECT COUNT(*) FROM ShoeOrder")
+})
 public class ShoeOrder implements java.io.Serializable {
 
-	private int orderId;
+	private Integer orderId;
 	private Customer customer;
 	private Date orderDate;
 	private String toAddress;
@@ -38,7 +48,7 @@ public class ShoeOrder implements java.io.Serializable {
 	public ShoeOrder() {
 	}
 
-	public ShoeOrder(int orderId, Customer customer, Date orderDate, String toAddress, String recipientName,
+	public ShoeOrder(Integer orderId, Customer customer, Date orderDate, String toAddress, String recipientName,
 			String recipientPhone, String payment, float orderSum, String status) {
 		this.orderId = orderId;
 		this.customer = customer;
@@ -51,7 +61,7 @@ public class ShoeOrder implements java.io.Serializable {
 		this.status = status;
 	}
 
-	public ShoeOrder(int orderId, Customer customer, Date orderDate, String toAddress, String recipientName,
+	public ShoeOrder(Integer orderId, Customer customer, Date orderDate, String toAddress, String recipientName,
 			String recipientPhone, String payment, float orderSum, String status, Set<OrderDetail> orderDetails) {
 		this.orderId = orderId;
 		this.customer = customer;
@@ -68,15 +78,15 @@ public class ShoeOrder implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id", unique = true, nullable = false)
-	public int getOrderId() {
+	public Integer getOrderId() {
 		return this.orderId;
 	}
 
-	public void setOrderId(int orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer_id", nullable = false)
 	public Customer getCustomer() {
 		return this.customer;
@@ -150,7 +160,7 @@ public class ShoeOrder implements java.io.Serializable {
 		this.status = status;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shoeOrder")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "shoeOrder", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<OrderDetail> getOrderDetails() {
 		return this.orderDetails;
 	}
@@ -158,5 +168,40 @@ public class ShoeOrder implements java.io.Serializable {
 	public void setOrderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
+	
+	@javax.persistence.Transient
+	public int getShoeAmount() {
+		int total = 0;
+		
+		for (OrderDetail orderDetail : orderDetails) {
+			total += orderDetail.getQuantity();
+		}
+		
+		return total;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(orderId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShoeOrder other = (ShoeOrder) obj;
+		if (orderId == null) {
+			if (other.orderId != null)
+				return false;
+		} else if (!orderId.equals(other.orderId))
+			return false;
+		return true;
+	}
+
+
 
 }

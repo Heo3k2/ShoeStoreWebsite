@@ -1,5 +1,5 @@
 package com.shoestore.entity;
-// Generated Apr 20, 2024, 2:20:15 PM by Hibernate Tools 4.3.6.Final
+// Generated Apr 20, 2024, 2:20:15â€¯PM by Hibernate Tools 4.3.6.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -20,24 +20,32 @@ import javax.persistence.Table;
 @Table(name = "order_detail", catalog = "shoestoredb")
 public class OrderDetail implements java.io.Serializable {
 
-	private OrderDetailId id;
+	private OrderDetailId id = new OrderDetailId();
 	private Shoe shoe;
 	private ShoeOrder shoeOrder;
+	private int quantity;
+	private float subTotal;
 
 	public OrderDetail() {
 	}
+	
+	public OrderDetail(OrderDetailId id) {
+		this.id = id;
+	}
 
-	public OrderDetail(OrderDetailId id, Shoe shoe, ShoeOrder shoeOrder) {
+	public OrderDetail(OrderDetailId id, Shoe shoe, ShoeOrder shoeOrder, int quantity, float subTotal) {
 		this.id = id;
 		this.shoe = shoe;
 		this.shoeOrder = shoeOrder;
+		this.quantity = quantity;
+		this.subTotal = subTotal;
 	}
 
 	@EmbeddedId
-	@AttributeOverrides({ @AttributeOverride(name = "orderId", column = @Column(name = "order_id", nullable = false)),
-			@AttributeOverride(name = "shoeId", column = @Column(name = "shoe_id", nullable = false)),
-			@AttributeOverride(name = "quantity", column = @Column(name = "quantity", nullable = false)),
-			@AttributeOverride(name = "subTotal", column = @Column(name = "sub_total", nullable = false, precision = 12, scale = 0)) })
+	
+	@AttributeOverrides({	@AttributeOverride(name = "orderId", column = @Column(name = "order_id", nullable = false)),
+							@AttributeOverride(name = "shoeId", column = @Column(name = "shoe_id", nullable = false))})
+	
 	public OrderDetailId getId() {
 		return this.id;
 	}
@@ -46,7 +54,7 @@ public class OrderDetail implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "shoe_id", nullable = false, insertable = false, updatable = false)
 	public Shoe getShoe() {
 		return this.shoe;
@@ -54,6 +62,7 @@ public class OrderDetail implements java.io.Serializable {
 
 	public void setShoe(Shoe shoe) {
 		this.shoe = shoe;
+		this.id.setShoe(shoe);
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -64,6 +73,24 @@ public class OrderDetail implements java.io.Serializable {
 
 	public void setShoeOrder(ShoeOrder shoeOrder) {
 		this.shoeOrder = shoeOrder;
+		this.id.setShoeOrder(shoeOrder);
+	}
+	
+	@Column(name = "quantity", nullable = false)
+	public int getQuantity() {
+		return this.quantity;
+	}
+	
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
+	@Column(name = "sub_total", nullable = false, precision = 12, scale = 0)
+	public float getSubTotal() {
+		return this.subTotal;
+	}
+	
+	public void setSubTotal(float subTotal) {
+		this.subTotal = subTotal;
+	}
 }
