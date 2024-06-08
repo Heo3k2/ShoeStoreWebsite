@@ -36,15 +36,15 @@ public class ShoppingCart {
 		return total;
 	}
 	
-	public double getTotalAmount() {
-		double total = 0.0f;
+	public float getTotalAmount() {
+		float total = 0.0f;
 		
 		Iterator<Shoe> iterator = cart.keySet().iterator();
 		
 		while(iterator.hasNext()) {
 			Shoe shoe = iterator.next();
 			Integer quantity = cart.get(shoe);
-			double subTotal = quantity * shoe.getShoePrice();
+			float subTotal = quantity * shoe.getShoePrice();
 			total += subTotal;
 		}
 		

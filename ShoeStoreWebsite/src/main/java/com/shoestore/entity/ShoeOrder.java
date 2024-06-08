@@ -30,7 +30,9 @@ import javax.persistence.TemporalType;
 @Table(name = "shoe_order", catalog = "shoestoredb")
 @NamedQueries({
 	@NamedQuery(name = "ShoeOrder.findAll", query = "SELECT sh FROM ShoeOrder sh ORDER BY sh.orderDate DESC"),
-	@NamedQuery(name = "ShoeOrder.countAll", query = "SELECT COUNT(*) FROM ShoeOrder")
+	@NamedQuery(name = "ShoeOrder.countAll", query = "SELECT COUNT(*) FROM ShoeOrder"),
+	@NamedQuery(name = "ShoeOrder.findByCustomer", query = "SELECT sh FROM ShoeOrder sh WHERE sh.customer.customerId =:customerId ORDER BY sh.orderDate DESC"),
+	@NamedQuery(name = "ShoeOrder.findByIdAndCustomer", query ="SELECT sh FROM ShoeOrder sh WHERE sh.orderId =:orderId AND sh.customer.customerId =:customerId")
 })
 public class ShoeOrder implements java.io.Serializable {
 

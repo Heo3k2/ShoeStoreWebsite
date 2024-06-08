@@ -44,7 +44,11 @@
 				<td>${status.index + 1}</td>
 				<td>${order.orderId}</td>
 				<td>${order.customer.fullName}</td>
-				<td>${order.subTotal}</td> 
+				<td>${order.shoeAmount}</td> 
+				<td><fmt:formatNumber value="${order.orderSum}" type="currency" /></td>
+				<td>${order.payment}</td>
+				<td>${order.status}</td>
+				<td>${order.orderDate}</td>
 				<td>
 					<a href="view_order?id=${order.orderId}">Details</a> &nbsp;
 					<a href="edit_order?id=${order.orderId}">Edit</a> &nbsp;
