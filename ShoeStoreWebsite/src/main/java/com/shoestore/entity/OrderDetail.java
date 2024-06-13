@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -18,6 +20,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "order_detail", catalog = "shoestoredb")
+@NamedQueries({
+	@NamedQuery(name = "OrderDetail.bestSelling", 
+				query = "SELECT od.shoe FROM OrderDetail od GROUP by od.shoe.shoeId " + "ORDER BY SUM(od.quantity) DESC")
+})
 public class OrderDetail implements java.io.Serializable {
 
 	private OrderDetailId id = new OrderDetailId();

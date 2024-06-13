@@ -49,4 +49,8 @@ public class RateDAO extends JPADAO<Rate> implements GenericDAO<Rate> {
 		
 		return null;
 	}
+	
+	public List<Rate> listMostRecent() {
+		return super.findWithNamedQuery("Rate.listAll", 0, 3);
+	}
 }

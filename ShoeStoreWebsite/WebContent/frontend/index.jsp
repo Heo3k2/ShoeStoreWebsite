@@ -16,8 +16,8 @@
 	<div align="center">
 		<h3>This is the main content</h3>
 		<h2 align="left" style="margin-left: 190px">New shoes</h2>
-		<div align="center" style="width: 80%; margin: 0 auto;">
-			<c:forEach var="shoe" items="${listNewShoes}">
+			<div align="center" style="width: 80%; margin: 0 auto;" >
+				<c:forEach var="shoe" items="${listNewShoes}">
 				<div style="display: inline-block; margin: 20px">
 					<div>
 						<a href="view_shoe?id=${shoe.shoeId}">
@@ -36,14 +36,52 @@
 					<div><b>Price: $${shoe.shoePrice}</b></div>
 				</div>
 			</c:forEach>
-			</div>
+	</div>
 		
-		<div align="left" style="clear: both; margin-left: 190px" >
-			<h2>Top-Selling shoes</h2>
+		<h2 align="left" style="margin-left: 190px">Top-Selling shoes</h2>
+		<div align="center" style="width: 80%; margin: 0 auto;" >
+				<c:forEach var="shoe" items="${listBestSellingShoes}">
+				<div style="display: inline-block; margin: 20px">
+					<div>
+						<a href="view_shoe?id=${shoe.shoeId}">
+							<img src="data:image/jpg;base64,${shoe.base64Image}" width="250" height="240"/>
+						</a>
+					</div>
+					<div style="font-size: 25px">
+						<a href="view_shoe?id=${shoe.shoeId}">
+							<b>${shoe.shoeName}</b>
+						</a>
+					</div>
+					<div>
+						<jsp:directive.include file="shoe_rating.jsp" />
+					</div>
+					<div>From: ${shoe.brand}</div>
+					<div><b>Price: $${shoe.shoePrice}</b></div>
+				</div>
+			</c:forEach>
 		</div>
 		
-		<div align="left" style="clear: both; margin-left: 190px">
-			<h2>Most-favorite Shoes</h2>
+		<h2 align="left" style="margin-left: 190px">Most-favorite Shoes</h2>
+		<div align="center" style="width: 80%; margin: 0 auto;">
+				<c:forEach var="shoe" items="${listMostFavoredShoes}">
+				<div style="display: inline-block; margin: 20px">
+					<div>
+						<a href="view_shoe?id=${shoe.shoeId}">
+							<img src="data:image/jpg;base64,${shoe.base64Image}" width="250" height="240"/>
+						</a>
+					</div>
+					<div style="font-size: 25px">
+						<a href="view_shoe?id=${shoe.shoeId}">
+							<b>${shoe.shoeName}</b>
+						</a>
+					</div>
+					<div>
+						<jsp:directive.include file="shoe_rating.jsp" />
+					</div>
+					<div>From: ${shoe.brand}</div>
+					<div><b>Price: $${shoe.shoePrice}</b></div>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	

@@ -165,6 +165,16 @@ public class OrderDAOTest {
 		assertTrue(listOrders.size() > 0);
 	}	
 	
+	@Test public void testListMostRecentSales() { 
+		List<ShoeOrder> recentOrders = orderDAO.listMostRecentSales(); 
+		
+		for (ShoeOrder shoeOrder : recentOrders) {
+			System.out.println(shoeOrder.getOrderId());
+		}
+
+		assertEquals(3, recentOrders.size()); 
+		}
+	
 	/*
 	 * @Test public void testGetByIdAndCustomerNull() { Integer orderId = 10;
 	 * Integer customerId = 99; ShoeOrder order = orderDAO.get(orderId, customerId);

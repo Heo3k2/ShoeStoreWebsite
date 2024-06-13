@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.shoestore.entity.Customer;
 import com.shoestore.entity.OrderDetailId;
+import com.shoestore.entity.Shoe;
 import com.shoestore.entity.ShoeOrder;
 
 public class OrderDAO extends JPADAO<ShoeOrder> implements GenericDAO<ShoeOrder> {
@@ -61,5 +62,8 @@ public class OrderDAO extends JPADAO<ShoeOrder> implements GenericDAO<ShoeOrder>
 		
 		return super.findWithNamedQuery("ShoeOrder.findByCustomer", "customerId", customerId);
 	}
-
+	
+	public List<ShoeOrder> listMostRecentSales() {
+		return super.findWithNamedQuery("ShoeOrder.findAll", 0, 3);
+	}
 }

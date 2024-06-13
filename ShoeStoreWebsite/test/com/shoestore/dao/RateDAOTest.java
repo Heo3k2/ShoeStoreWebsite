@@ -108,4 +108,11 @@ public class RateDAOTest {
 		
 		assertNull(result);
 	}
+	
+	@Test
+	public void testListMostRecent() {
+		List<Rate> recentRates = rateDao.listMostRecent();
+		
+		assertEquals(3, recentRates.size());
+	}
 }

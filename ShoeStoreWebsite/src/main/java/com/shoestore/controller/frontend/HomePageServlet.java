@@ -31,8 +31,12 @@ public class HomePageServlet extends HttpServlet {
 		ShoeDAO shoeDAO = new ShoeDAO();
 		
 		List<Shoe>listNewShoes = shoeDAO.listNewShoes();
+		List<Shoe> listBestSellingShoes = shoeDAO.listBestSellingShoes();
+		List<Shoe> listMostFavoredShoes = shoeDAO.listMostFavoredShoes();
 		
 		request.setAttribute("listNewShoes", listNewShoes);
+		request.setAttribute("listBestSellingShoes", listBestSellingShoes);
+		request.setAttribute("listMostFavoredShoes", listMostFavoredShoes);
 		
 		String homePage = "frontend/index.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(homePage);

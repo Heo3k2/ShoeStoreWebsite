@@ -124,6 +124,18 @@ public class JPADAO<E> {
 		return res;
 	}
 	
+	public List<Object[]> findWithNamedQueryObjects(String queryName, int firstResult, int maxResult){
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		
+		Query query = entityManager.createNamedQuery(queryName);
+		query.setFirstResult(firstResult);
+		query.setMaxResults(maxResult);
+		
+		List<Object[]>res = query.getResultList();
+		
+		entityManager.close();
+		return res;
+	}
 	
 	//Trả về sồ lượng dữ liệu có trong database bằng query
 	public long countWithNamedQuery(String queryName) {

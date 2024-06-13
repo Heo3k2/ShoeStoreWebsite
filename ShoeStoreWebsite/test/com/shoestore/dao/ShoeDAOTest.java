@@ -203,4 +203,26 @@ public class ShoeDAOTest   {
 		
 		assertTrue(shoeNumb == 7);
 	}
+	
+	@Test
+	public void testListBestSellingShoes() {
+		List<Shoe> topBestSellingShoes = shoeDAO.listBestSellingShoes();
+		
+		for (Shoe shoe : topBestSellingShoes) {
+			System.out.println(shoe.getShoeName());
+		}
+		
+		assertEquals(4, topBestSellingShoes.size());
+	}
+	
+	@Test
+	public void listMostFavoredShoes() {
+		List<Shoe> topMostFavoredShoes = shoeDAO.listMostFavoredShoes();
+		
+		for (Shoe shoe : topMostFavoredShoes) {
+			System.out.println(shoe.getShoeName());
+		}
+
+		assertEquals(4, topMostFavoredShoes.size());
+	}
 }

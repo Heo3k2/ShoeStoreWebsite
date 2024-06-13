@@ -1,5 +1,6 @@
 package com.shoestore.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.management.Query;
@@ -67,4 +68,23 @@ public class ShoeDAO extends JPADAO<Shoe> implements GenericDAO<Shoe> {
 	public long countByType(int typeId) {
 		return super.countWithNamedQuery("Shoe.countByType", "typeId", typeId);
 	}	
+	
+	public List<Shoe> listBestSellingShoes() {
+		return super.findWithNamedQuery("OrderDetail.bestSelling", 0, 4);
+	}
+
+	public List<Shoe> listMostFavoredShoes() {
+		List<Shoe> mostFavoredShoes = new ArrayList<>();
+		
+		List<Object[]> result = super.findWithNamedQueryObjects("Review.mostFavoredShoes", 0, 4);
+		
+		if (!result.isEmpty()) {
+			for (Object[] elements : result) {
+				Shoe shoe = (Shoe) elements[0];
+				mostFavoredShoes.add(shoe);
+			}
+		}
+		
+		return mostFavoredShoes;
+	}
 }
